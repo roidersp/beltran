@@ -22,4 +22,11 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/main');
 	}
+
+	public function nuevo()
+	{
+		$this->load->view('admin/add');
+	}
+
+
 }

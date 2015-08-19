@@ -44,3 +44,23 @@
 	padding: 10px 15px;
 }
 
+
+.header_zona_titulo{
+	float: left;
+}
+
+.header_zona_btnCliente{
+	float: right;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 10px;
+	font-size: 12px;
+	background-color: #2a2e39;
+	margin-top: 7px;
+	color: white;
+	cursor: pointer;
+}
+
+.header_zona_btnCliente:hover{
+	background-color: rgba(41, 45, 56, 0.8);
+}
