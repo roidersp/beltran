@@ -35,15 +35,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="tabla_titulo">Usuarios</div>
 						<div class="tabla_cont">
 							<div class="form_cont">
-								<form action="/admin/add" method="post">
+								<form action="add" method="post">
 									<div class="form_text">Nombre</div>
 									<input type="text" name="nombre" />
 									<div class="form_text">Apellido paterno</div>
 									<input type="text" name="apellidoP" />
 									<div class="form_text">Apellido materno</div>
 									<input type="text" name="apellidoM" />
-									<div class="form_text">Correo electronico</div>
-									<input type="email" name="email" />
+									<div class="form_text">Correo electrónico</div>
+									<input type="email" name="correo" />
 									<div class="form_text">tipo</div>
 									<select name="tipo">
 										<option selected="selected" value="cliente" >Cliente</option>

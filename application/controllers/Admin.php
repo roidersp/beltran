@@ -18,14 +18,43 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	 
+	 public function __construct() {
+        parent::__construct();
+        $this->load->library(array('email'));
+        $this->load->helper(array('url'));
+        $this->load->model(array('usuarios_model'));
+        
+		$config['protocol'] = 'mail';
+		$config['wordwrap'] = FALSE;
+		$config['mailtype'] = 'html';
+		$this->email->initialize($config);
+    }
+	 
 	public function index()
 	{
-		$this->load->view('admin/main');
+		$users  = $this->usuarios_model->get_all();
+		$data["tabla"]=$users;
+		$this->load->view('admin/main',$data);
+		$this->db->close();
+		
 	}
 
 	public function nuevo()
 	{
 		$this->load->view('admin/add');
+	}
+	
+	public function add()
+	{
+		
+		$data   = $this->input->post(NULL, TRUE);
+		
+		var_dump($data);
+		
+		 $user_id =   $this->usuarios_model->create($data);
+		 
+		 var_dump($user_id);
 	}
 
 

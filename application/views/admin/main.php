@@ -9,11 +9,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href='http://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Hind:400,600,700,500,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
 		<link rel="stylesheet" href="/beltran/css/estilos.css" />
 		<link rel="stylesheet" href="/beltran/css/admin.css" />
 		<link rel="stylesheet" href="/beltran/css/normalize.css"/>
-		<script type="text/javascript" src="/beltran/js/jquery.js"></script>
+		<script type="text/javascript" src="/beltran/js/jquery.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" type="text/javascript"></script>
+		<script type="text/javascript" charset="utf-8">
+			/* Data set - can contain whatever information you want */
+
+			var json=<?php echo ($tabla);?>;
+			console.log(json[0]);
+			var aDataSet = json.aaData;
+			console.log(aDataSet);
+			
+			$(document).ready(function() {
+			
+				
+				$('#table').dataTable( {
+					"aaData": aDataSet,
+					"iDisplayLength": 1000,
+					"bScrollInfinite": true,
+			        "bScrollCollapse": true,
+					"aoColumns": [
+						{ "sTitle": "No." },
+			            { "sTitle": "Nombre" },
+			            { "sTitle": "Apellido P." },
+			            { "sTitle": "Apellido M." },
+			            { "sTitle": "correo" },
+			            { "sTitle": "tipo" }
+					]
+				} );	
+			} );
+			
+				</script>
  
 	</head>
 	<body> 
@@ -34,7 +63,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="tabla_cont">
 						<div class="tabla_titulo">Usuarios</div>
 						<div class="tabla_cont">
-							
+							<div  id="table_container" style="width:1200px;max-width=100%;margin:auto;">
+								<table cellpadding="0" cellspacing="0" border="0" class="display" id="table" width="100%">
+								</table>
+							</div>
 						</div>
 					</div>			
 				</div>
