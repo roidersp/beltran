@@ -50,11 +50,26 @@ class Admin extends CI_Controller {
 		
 		$data   = $this->input->post(NULL, TRUE);
 		
-		var_dump($data);
 		
 		 $user_id =   $this->usuarios_model->create($data);
 		 
 		 var_dump($user_id);
+		 
+	}
+
+
+	public function cliente()
+	{	
+		$id=$_POST['id'];
+		
+		$users  = $this->usuarios_model->get_usuario($id);
+		
+		
+		
+		echo("id ".$id);
+		
+		var_dump($users);
+		 
 	}
 
 

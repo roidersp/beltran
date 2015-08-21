@@ -1,5 +1,4 @@
 <?php
-
 class Usuarios_model extends CI_Model
 {
   
@@ -16,9 +15,9 @@ class Usuarios_model extends CI_Model
 	}
 	
 	public function create ($param) {
-            
+		
             $this->db->insert($this->table_name, $param);
-
+            
             return $this->db->insert_id();
       
     }
@@ -35,7 +34,7 @@ class Usuarios_model extends CI_Model
             
             for($i=0;$i<count($query_users_array);$i++){
             	$array=array();
-            	$array[]=$i+1;
+            	//$array[]=$i+1;
             	$array[]=$query_users_array[$i]['idUsuarios'];
             	$array[]=$query_users_array[$i]['nombre'];
             	$array[]=$query_users_array[$i]['apellidoP'];
@@ -43,19 +42,33 @@ class Usuarios_model extends CI_Model
             	$array[]=$query_users_array[$i]['correo'];
             	$array[]=$query_users_array[$i]['tipo'];
 
-            	
             	$users_array[]=$array;
 	            
             }
             
-            
             $arrays = new stdClass();
-            
             $arrays->aaData=$users_array;
-            
             $json = json_encode($arrays);
             
             return $json;
             
     }
+    
+     public function get_usuario($id) {
+            
+            $this->db->select('idUsuarios, nombre, apellidoP, apellidoM, correo, tipo');
+            $this->db->where('idUsuarios', $id);
+            $this->db->from($this->table_name);
+            $query_result = $this->db->get();
+            
+            $query_users_array = $query_result->result_array();
+            
+            
+            $json = json_encode($query_users_array);
+            
+            return $json;
+            
+    }
+
+    
 }

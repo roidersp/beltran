@@ -40,6 +40,10 @@
 	
 }
 
+tr.selected{
+	cursor: pointer;
+}
+
 .tabla_cont{
 	padding: 10px 15px;
 }

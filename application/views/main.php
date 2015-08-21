@@ -9,8 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href='http://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Hind:400,600,700,500,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/estilos.css" />
-		<link rel="stylesheet" href="css/normalize.css"/>
+		<link rel="stylesheet" href="<?php echo base_url('css/estilos.css'); ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('css/normalize.css'); ?>"/>
 	</head>
 	<body> 
 		<div class="main_container">
