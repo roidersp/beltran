@@ -24,7 +24,7 @@ class Admin extends CI_Controller {
         $this->load->library(array('email'));
         $this->load->helper(array('url'));
         $this->load->model(array('usuarios_model'));
-        
+		$this->load->model(array('expedientes_model'));        
 		$config['protocol'] = 'mail';
 		$config['wordwrap'] = FALSE;
 		$config['mailtype'] = 'html';
@@ -37,7 +37,6 @@ class Admin extends CI_Controller {
 		$data["tabla"]=$users;
 		$this->load->view('admin/main',$data);
 		$this->db->close();
-		
 	}
 
 	public function nuevo()
@@ -47,28 +46,36 @@ class Admin extends CI_Controller {
 	
 	public function add()
 	{
-		
-		$data   = $this->input->post(NULL, TRUE);
-		
-		
-		 $user_id =   $this->usuarios_model->create($data);
-		 
-		 var_dump($user_id);
-		 
+		$data = $this->input->post(NULL, TRUE);
+		$user_id = $this->usuarios_model->create($data);
+		var_dump($user_id);
 	}
 
-
-	public function cliente()
+	public function cliente($id)
 	{	
-		$id=$_POST['id'];
-		
 		$users  = $this->usuarios_model->get_usuario($id);
+		$data['cliente']=($users);
+		$this->load->view('admin/cliente',$data);
+	}
+	
+	public function expediente()
+	{	
+		$data["id"]=$_POST["id"];
+		$this->load->view('admin/addexpediente',$data);
+	}
+	
+	public function nuevoexpediente()
+	{	
+		$data   = $this->input->post(NULL, TRUE);
+		
+		$id_usuario=$data['id'];
+		unset($data['id']);
+		
+		$user_id =   $this->expedientes_model->create($data,$id_usuario);
 		
 		
 		
-		echo("id ".$id);
-		
-		var_dump($users);
+		//var_dump($data);
 		 
 	}
 

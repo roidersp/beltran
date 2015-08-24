@@ -17,7 +17,6 @@ class Usuarios_model extends CI_Model
 	public function create ($param) {
 		
             $this->db->insert($this->table_name, $param);
-            
             return $this->db->insert_id();
       
     }
@@ -64,7 +63,7 @@ class Usuarios_model extends CI_Model
             $query_users_array = $query_result->result_array();
             
             
-            $json = json_encode($query_users_array);
+            $json = ($query_users_array[0]);
             
             return $json;
             

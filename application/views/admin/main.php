@@ -60,8 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			$(document).on("click","tbody tr", function(){
 				var id = $(this).find(".sorting_1").text();
-				$('.form_t').html('<form action="<?php echo base_url('admin/cliente'); ?>" name="form" method="post" style="display:none;"> <input type="text" name="id" value="' + id + '" /></form>');
-				document.forms['form'].submit();
+				window.location = "<?php echo base_url("admin/cliente/"); ?>/"+id;
 			});
  
 			
