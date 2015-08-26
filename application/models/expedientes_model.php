@@ -12,21 +12,30 @@ class Expedientes_model extends CI_Model
             $this->load->database();
             $this->id = "idExpediente";
             $this->table_name = "Expediente";
-            $this->table_key = "Clientes_has_Expediente";
 	}
 	
-	public function create ($param,$id_usuario) {
+	public function create ($param) {
        // var_dump($param);
                
         $this->db->insert($this->table_name, $param);
         $id = $this->db->insert_id();
         
-        $data = array("Clientes_idClientes"=>$id_usuario, "Expediente_idExpediente"=>$id);
         
-        $this->db->insert($this->table_key, $data);
+    	          
+    }
+    
+    public function getexpedientes_bycliente($cliente_id){
+	    $this->db->select('*');
+        $this->db->from($this->table_name);
+		$this->db->where("Usuarios_idUsuarios", $cliente_id);
         
+        $query_result   =   $this->db->get();
         
-      
+        $query_users_array  =   $query_result->result_array();
+        
+        $json = ($query_users_array);
+            
+        return $json;
     }
     
 }

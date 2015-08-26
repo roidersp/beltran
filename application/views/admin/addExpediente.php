@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="tabla_cont">
 							<div class="form_cont">
 								<form action="nuevoexpediente" method="post">
-									<input type="hidden" name="id" value="<?php echo($id); ?>"/>
+									<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
 									<div class="form_text">No. Expediente</div>
 									<input type="text" name="no_expediente" />
 									<div class="form_text">Fecha de presentación</div>

@@ -43,7 +43,18 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/add');
 	}
-	
+
+	public function updateusuario()
+	{
+		$data = $this->input->post(NULL, TRUE);
+		$id=$data["id"];
+		
+		unset($data["id"]);
+		
+		$user_id = $this->usuarios_model->update($id,$data);
+	}
+
+		
 	public function add()
 	{
 		$data = $this->input->post(NULL, TRUE);
@@ -55,7 +66,12 @@ class Admin extends CI_Controller {
 	{	
 		$users  = $this->usuarios_model->get_usuario($id);
 		$data['cliente']=($users);
+		
+		$data['tabla']=$this->expedientes_model->getexpedientes_bycliente($id);
+		
+
 		$this->load->view('admin/cliente',$data);
+		
 	}
 	
 	public function expediente()
@@ -68,13 +84,11 @@ class Admin extends CI_Controller {
 	{	
 		$data   = $this->input->post(NULL, TRUE);
 		
-		$id_usuario=$data['id'];
-		unset($data['id']);
+		$id_usuario=$data['Usuarios_idUsuarios'];
+		//unset($data['id']);
 		
-		$user_id =   $this->expedientes_model->create($data,$id_usuario);
-		
-		
-		
+		$user_id =   $this->expedientes_model->create($data);
+		redirect("admin/cliente/".$id_usuario, 'location');
 		//var_dump($data);
 		 
 	}
