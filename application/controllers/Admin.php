@@ -59,7 +59,7 @@ class Admin extends CI_Controller {
 	{
 		$data = $this->input->post(NULL, TRUE);
 		$user_id = $this->usuarios_model->create($data);
-		var_dump($user_id);
+		redirect("admin", 'location');
 	}
 
 	public function cliente($id)
@@ -69,29 +69,39 @@ class Admin extends CI_Controller {
 		
 		$data['tabla']=$this->expedientes_model->getexpedientes_bycliente($id);
 		
-
 		$this->load->view('admin/cliente',$data);
 		
 	}
 	
-	public function expediente()
+	public function expediente($id)
 	{	
-		$data["id"]=$_POST["id"];
-		$this->load->view('admin/addexpediente',$data);
+		$users  = $this->expedientes_model->get_expediente($id);
+		$data['expediente']=($users);
+		$data["id"]=$id;
+		$this->load->view('admin/expediente',$data);
 	}
 	
 	public function nuevoexpediente()
 	{	
 		$data   = $this->input->post(NULL, TRUE);
-		
-		$id_usuario=$data['Usuarios_idUsuarios'];
-		//unset($data['id']);
-		
-		$user_id =   $this->expedientes_model->create($data);
-		redirect("admin/cliente/".$id_usuario, 'location');
-		//var_dump($data);
+		$this->load->view('admin/addexpediente',$data);
 		 
 	}
+	
+	public function addexpediente()
+	{	
+		$data = $this->input->post(NULL, TRUE);
+		$user_id = $this->expedientes_model->create($data);
+		$id_usuario=$data['Usuarios_idUsuarios'];
+		redirect("admin/cliente/".$id_usuario, 'location');
+	}
+
+	public function nuevoacuerdo(){
+		$data["id"]=$_POST["id"];
+		$this->load->view('admin/addacuerdo',$data);
+	}
+	
+	
 
 
 }

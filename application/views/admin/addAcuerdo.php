@@ -27,30 +27,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="header_zona_titulo">
 							Administrador / Agregar expediente
 						</div>
-						<div class="header_zona_btnCliente">
-							Nuevo usuario <?php echo($id); ?> 
-						</div>
+
 					</div>
 					<div class="tabla_cont">
 						<div class="tabla_titulo">Expediente</div>
 						<div class="tabla_cont">
 							<div class="form_cont">
-								<form action="addexpediente" method="post">
+								<form action="nuevoexpediente" method="post">
 									<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
-									<div class="form_text">No. Expediente</div>
-									<input type="text" name="no_expediente" />
-									<div class="form_text">Fecha de presentación</div>
-									<input type="date" name="fecha_presentacion" />
-									<div class="form_text">Fecha de ingreso</div>
-									<input type="date" name="fecha_ingreso" />
-									<div class="form_text">Secretaria</div>
-									<input type="text" name="secretaria" />
-									<div class="form_text">Actor</div>
-									<input type="text" name="actor" />
-									<div class="form_text">Demandado</div>
-									<input type="text" name="demandado" />
-									<div class="form_text">Juicio</div>
-									<input type="text" name="juicio" />
+									<div class="form_text">Fecha de Auto</div>
+									<input type="date" name="fecha_auto" />
+									<div class="form_text">Fecha de publicación</div>
+									<input type="date" name="fecha_publicacion" />
+									<div class="form_text">Resumen</div>
+									<textarea name="resumen" rows="4" cols="20"></textarea>
+									<div class="form_text">Tipo</div>
+									<input type="text" name="tipo" />
+									<input type="image" name="images" draggable multiple />
 									
 									
 									<input type="submit" value="Guardar"/>

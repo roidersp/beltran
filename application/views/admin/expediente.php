@@ -18,14 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script type="text/javascript" charset="utf-8">
 			/* Data set - can contain whatever information you want */
 
-			var json=<?php echo(json_encode( $tabla));?>;
+			var json=<?php //echo(json_encode( $tabla));?>;
 			var aDataSet = json;
 			console.log(aDataSet);
 			
 			$(document).ready(function() {
 			
 				
-				var table = $('#table').dataTable( {
+				/*var table = $('#table').dataTable( {
 					aaData: aDataSet,
 					iDisplayLength: 50,
 					bScrollInfinite: true,
@@ -44,7 +44,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				        { data: 'juicio' }
 				    ]
 					
-				} );	
+				} );
+				*/	
 			} );
 			
 			$(document).on({
@@ -59,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			$(document).on("click","tbody tr", function(){
 				var id = $(this).find(".sorting_1").text();
-				window.location = "<?php echo base_url("admin/expediente/"); ?>/"+id;
+				window.location = "<?php echo base_url("admin/cliente/"); ?>/"+id;
 			});
  
 			
@@ -76,32 +77,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="header_zona_titulo">
 							Administrador / Clientes
 						</div>
-						<form action="<?php echo base_url('admin/nuevoexpediente'); ?>" method="post">
-							<input type="hidden" name="id" value="<?php echo $cliente["idUsuarios"]; ?>"/>
-							<input class="header_zona_btnCliente" type="submit" value="Nuevo expediente"/>
+						<form action="<?php echo base_url('admin/nuevoacuerdo'); ?>" method="post">
+							<input type="hidden" name="id" value="<?php echo $expediente["idExpediente"]; ?>"/>
+							<input class="header_zona_btnCliente" type="submit" value="Nuevo acuerdo"/>
 						</form>
 					</div>
 					
 					<div class="content_zona">
 						
+									
 						<div class="tabla_cont">
 							<div class="form_cont">
 								<form action="<?php echo base_url('admin/updateusuario'); ?>" method="post">
-									<input type="hidden" name="id" value="<?php echo $cliente["idUsuarios"]; ?>"/>
-									<div class="form_text">Nombre</div>
-									<input type="text" name="nombre" value="<?php echo $cliente['nombre']; ?>" />
-									<div class="form_text">Apellido paterno</div>
-									<input type="text" name="apellidoP" value="<?php echo $cliente['apellidoP']; ?>" />
-									<div class="form_text">Apellido materno</div>
-									<input type="text" name="apellidoM" value="<?php echo $cliente['apellidoM']; ?>"/>
-									<div class="form_text">Correo electrónico</div>
-									<input type="email" name="correo" value="<?php echo $cliente['correo']; ?>"/>
-									<div class="form_text">tipo</div>
-									<select name="tipo">
-										<option <?php echo ($cliente['tipo']=='cliente'?'selected="selected"':'' ) ?>  value="cliente" >Cliente</option>
-										<option <?php echo($cliente['tipo']=='administrador'?'selected="selected"':'' ) ?> value="administrador">Administrador</option>
-										<option  <?php echo($cliente['tipo']=='colaborador'?'selected="selected"':'' )?>  value="colaborador">Colaborador</option>
-									</select><br>	
+									<input type="hidden" name="id" value="<?php echo $expediente["idExpediente"]; ?>"/>
+									<div class="form_text">No. Expediente</div>
+									<input type="text" name="no_expedientes" value="<?php echo $expediente['no_expediente']; ?>" />
+									<div class="form_text">Fecha de presentación</div>
+									<input type="date" name="fecha_presentacion" value="<?php echo $expediente['fecha_presentacion']; ?>" />
+									<div class="form_text">Fecha de ingreso</div>
+									<input type="date" name="fecha_ingreso" value="<?php echo $expediente['fecha_ingreso']; ?>"/>
+									<div class="form_text">Secretaria</div>
+									<input type="text" name="secretaria" value="<?php echo $expediente['secretaria']; ?>"/>
+									<div class="form_text">Actor</div>
+									<input type="text" name="actor" value="<?php echo $expediente['actor']; ?>"/>
+									<div class="form_text">Demandado</div>
+									<input type="text" name="demandado" value="<?php echo $expediente['demandado']; ?>"/>
+									<div class="form_text">Juicio</div>
+									<input type="text" name="juicio" value="<?php echo $expediente['juicio']; ?>"/>
 									<input type="submit" value="Guardar"/>
 								</form>						
 							</div>
@@ -114,13 +116,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<thead>
 									            <tr>
 									                <th>No.</th>
-									                <th>No. Exp</th>
-									                <th>F. presentación</th>
-									                <th>F. ingreso</th>
-									                <th>Secretaria</th>
-									                <th>Actor</th>
-									                <th>Demandado</th>
-									                <th>Juicio</th>
+									                <th>Tipo</th>
+									                <th>F. Auto</th>
+									                <th>F. Publicación</th>
+									                <th>Resumen</th>
+									                <th>Ver imagen</th>
 									            </tr>
 									        </thead>
 										</table>

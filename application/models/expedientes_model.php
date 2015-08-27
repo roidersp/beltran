@@ -38,6 +38,22 @@ class Expedientes_model extends CI_Model
         return $json;
     }
     
+    public function get_expediente($id) {
+            
+            $this->db->select('idExpediente, no_expediente, fecha_presentacion, fecha_ingreso, secretaria, actor, demandado,juicio');
+            $this->db->where('idExpediente', $id);
+            $this->db->from($this->table_name);
+            $query_result = $this->db->get();
+            
+            $query_users_array = $query_result->result_array();
+            
+            
+            $json = ($query_users_array[0]);
+            
+            return $json;
+            
+    }
+    
 }
 
 ?>

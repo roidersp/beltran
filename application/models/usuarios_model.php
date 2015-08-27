@@ -58,7 +58,7 @@ class Usuarios_model extends CI_Model
             
     }
     
-     public function get_usuario($id) {
+    public function get_usuario($id) {
             
             $this->db->select('idUsuarios, nombre, apellidoP, apellidoM, correo, tipo');
             $this->db->where('idUsuarios', $id);
