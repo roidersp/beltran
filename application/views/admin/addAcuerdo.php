@@ -13,7 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="/beltran/css/admin.css" />
 		<link rel="stylesheet" href="/beltran/css/normalize.css"/>
 		<script type="text/javascript" src="/beltran/js/jquery.js"></script>
-		<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" type="text/javascript"></script>
  
 	</head>
 	<body> 
@@ -33,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="tabla_titulo">Expediente</div>
 						<div class="tabla_cont">
 							<div class="form_cont">
-								<form action="nuevoexpediente" method="post">
+								<form action="addacuerdo" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
 									<div class="form_text">Fecha de Auto</div>
 									<input type="date" name="fecha_auto" />
@@ -43,9 +42,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<textarea name="resumen" rows="4" cols="20"></textarea>
 									<div class="form_text">Tipo</div>
 									<input type="text" name="tipo" />
-									<input type="image" name="images" draggable multiple />
+									<input type="file" name="images[]" accept="image/*" draggable multiple="multiple" />
 									
-									
+									<div id="images_conrainer"></div>
+																		
 									<input type="submit" value="Guardar"/>
 								</form>						
 							</div>

@@ -21,14 +21,10 @@ class Admin extends CI_Controller {
 	 
 	 public function __construct() {
         parent::__construct();
-        $this->load->library(array('email'));
         $this->load->helper(array('url'));
         $this->load->model(array('usuarios_model'));
-		$this->load->model(array('expedientes_model'));        
-		$config['protocol'] = 'mail';
-		$config['wordwrap'] = FALSE;
-		$config['mailtype'] = 'html';
-		$this->email->initialize($config);
+		$this->load->model(array('expedientes_model'));
+		$this->load->model(array('acuerdo_model'));
     }
 	 
 	public function index()
@@ -100,6 +96,67 @@ class Admin extends CI_Controller {
 		$data["id"]=$_POST["id"];
 		$this->load->view('admin/addacuerdo',$data);
 	}
+	
+	public function acuerdo($id)
+	{	
+		$users  = $this->acuero_model->get_acuerdo($id);
+		$data['acuerdo']=($users);
+		$data["id"]=$id;
+		$this->load->view('admin/acuerdo',$data);
+	}
+	
+	
+	public function addacuerdo()
+	{	
+		$data = $this->input->post(NULL, TRUE);
+		
+				
+		
+		
+		
+		var_dump( $_POST);
+		echo "<br>";
+		var_dump( $_FILES);
+		echo "<br>";
+		var_dump($data);
+	}
+	
+	public function uploadimages()
+	{
+			$config['upload_path']   =   "acuerdos/";
+       $config['allowed_types'] =   "gif|jpg|jpeg|png"; 
+       $config['max_size']      =   "5000";
+       $config['max_width']     =   "1907";
+       $config['max_height']    =   "1280";
+ 
+       $this->load->library('upload',$config);
+ 
+       if(!$this->upload->do_upload())
+       {
+	   		echo "cytvub";
+           echo $this->upload->display_errors();
+ 
+       }else{
+ 
+           $finfo=$this->upload->data();
+ 
+ 
+           $data['uploadInfo'] = $finfo;
+ 
+ 
+ 
+           // You can view content of the $finfo with the code block below
+ 
+           echo '<pre>';
+ 
+           print_r($finfo);
+ 
+           echo '</pre>';
+ 
+       }
+
+	}
+	
 	
 	
 
