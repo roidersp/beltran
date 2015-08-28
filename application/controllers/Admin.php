@@ -62,11 +62,8 @@ class Admin extends CI_Controller {
 	{	
 		$users  = $this->usuarios_model->get_usuario($id);
 		$data['cliente']=($users);
-		
 		$data['tabla']=$this->expedientes_model->getexpedientes_bycliente($id);
-		
 		$this->load->view('admin/cliente',$data);
-		
 	}
 	
 	public function expediente($id)
@@ -123,24 +120,20 @@ class Admin extends CI_Controller {
 	
 	public function uploadimages()
 	{
-			$config['upload_path']   =   "acuerdos/";
-       $config['allowed_types'] =   "gif|jpg|jpeg|png"; 
-       $config['max_size']      =   "5000";
-       $config['max_width']     =   "1907";
-       $config['max_height']    =   "1280";
+		$config['upload_path']   =   "acuerdos/";
+        $config['allowed_types'] =   "gif|jpg|jpeg|png"; 
+        $config['max_size']      =   "5000";
+        $config['max_width']     =   "1907";
+        $config['max_height']    =   "1280";
  
-       $this->load->library('upload',$config);
+        $this->load->library('upload',$config);
  
-       if(!$this->upload->do_upload())
-       {
+        if(!$this->upload->do_upload())
+        {
 	   		echo "cytvub";
-           echo $this->upload->display_errors();
- 
-       }else{
- 
+	   		echo $this->upload->display_errors();
+	   	}else{
            $finfo=$this->upload->data();
- 
- 
            $data['uploadInfo'] = $finfo;
  
  
