@@ -106,10 +106,7 @@ class Admin extends CI_Controller {
 	public function addacuerdo()
 	{	
 		$data = $this->input->post(NULL, TRUE);
-		
-				
-		
-		
+
 		
 		var_dump( $_POST);
 		echo "<br>";
@@ -119,57 +116,38 @@ class Admin extends CI_Controller {
 	}
 	
 	public function uploadimages()
-	{
-
-       
-	       // Detect form submission.
-	       echo("test");
-	       var_dump($_POST);
-	       
-	       var_dump($this->input->post('submit'));
-	       
-	        if($this->input->post('submit')){
+	{	       
+		
+		$id=$_POST['id'];
+		$upload_dir = "acuerdos/expediente_".$id."/";
+		$test=array();
+ 
+		if (isset($_FILES["uploadfile"])) {
+		    $no_files = count($_FILES["uploadfile"]['name']);
+		    
+					    
+		    if (!file_exists($upload_dir)) {
+			    mkdir($upload_dir, 0777, true);
+			}		    
+					    
+		    for ($i = 0; $i < $no_files; $i++) {
+		 
+		        if ($_FILES["uploadfile"]["error"][$i] > 0) {
+		            echo "Error: " . $_FILES["uploadfile"]["error"][$i] . "<br>";
+		        } else {
+		            $temp = explode(".", $_FILES["uploadfile"]["name"][$i]);
+		            $extension = end($temp);
+		            
+		            
+		            move_uploaded_file($_FILES["uploadfile"]["tmp_name"][$i], $upload_dir . $_FILES["uploadfile"]["name"][$i]);
+		            $test[]=  $upload_dir . $_FILES["uploadfile"]["name"][$i];        
+		        }
+		    }
+		}    
+		
+		
+		echo(json_encode($test));  
 	        
-	            $path = '/beltran/acuerdos/';
-	            $this->load->library('upload');
-	            /**
-	             * Refer to https://ellislab.com/codeigniter/user-guide/libraries/file_uploading.html 
-	             * for full argument documentation.
-	             *
-	             */
-	             
-	            // Define file rules
-	            $this->upload->initialize(array(
-	                "upload_path"       =>  $path,
-	                "allowed_types"     =>  "gif|jpg|png",
-	                "max_size"          =>  '100',
-	                "max_width"         =>  '1024',
-	                "max_height"        =>  '768'
-	            ));
-	            
-	            if($this->upload->do_multi_upload("uploadfile")){
-	                
-	                $data['upload_data'] = $this->upload->get_multi_upload_data();
-	                
-	                echo '<p class = "bg-success">' . count($data['upload_data']) . 'File(s) successfully uploaded.</p>';
-	                
-	            } else {    
-	                // Output the errors
-	                $errors = array('error' => $this->upload->display_errors('<p class = "bg-danger">', '</p>'));               
-	            
-	                foreach($errors as $k => $error){
-	                    echo $error;
-	                }
-	                
-	            }
-	            
-	        } else {
-	            echo '<p class = "bg-danger">An error occured, please try again later.</p>';
-	            
-	        }
-	        // Exit to avoid further execution
-	        exit();
-
 	}
 	
 	

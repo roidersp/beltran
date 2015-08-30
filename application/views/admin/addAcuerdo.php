@@ -13,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="/beltran/css/admin.css" />
 		<link rel="stylesheet" href="/beltran/css/normalize.css"/>
 		<script type="text/javascript" src="/beltran/js/jquery.min.js"></script>
-		<script type="text/javascript" src="/beltran/js/jquery.ajaxfileupload.js"></script>
+		<script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+
 		
 	</head>
 	<body> 
@@ -48,12 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<input type="submit" value="Guardar"/>
 								</form>
 								
-								
-								<form action="http://localhost/beltran/index.php/admin/uploadimages" accept-charset="utf-8" id="addimage">
+								<?php echo form_open_multipart('admin/uploadimages', array('id' => 'addimage'));?>									
+									<input type="file" multiple = "multiple" accept = "image/*" class = "form-control" name="uploadfile[]" size="20" id="nl" /><br />
+									<input type="hidden" name="id" value="<?php echo($id); ?>" />
+									
+						            <input type="submit" class = "btn btn-primary" />
+						        </form>
 
-									<input type="file" id="inputimages" name="images"  />
-									<input type="hidden" value="test">
-									<input type="submit" value="test" />
 								</form>	
 								
 								
@@ -71,93 +73,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			
 		</div>
+		
 		<script type="text/javascript">
+			jQuery(document).ready(function($) {
 			
+			var fileInput = document.getElementById('nl');
+			var fd = new FormData(this);
+		
 			
-			/*var options = {
+            var options = {
                 beforeSend: function(){
                     // Replace this with your loading gif image
                     $("#images_conrainer").html('subiendo');
                 },
                 complete: function(response){
                     // Output AJAX response to the div container
-                    console.log(response);
-                    $("#images_conrainer").html(response.responseText);
-                    
-                    //$('html, body').animate({scrollTop: $(".upload-image-messages").offset().top-100}, 150);
+                   // $("#images_conrainer").html(response.responseText);
+                   var list=$.parseJSON(response.responseText)
+                   
+                   $.each(list, function(index, item){
+	                   console.log(item);
+	                   var input = '<input id="imagen_'+index+'" type="hidden" name="urls[]" value="'+item+'" />';
+	                   $("#acuerdoajax").append(input);
+	                   
+	                   $()
+                   })
                     
                 }
             };  
+ 
             // Submit the form
             $("#addimage").ajaxForm(options);  
+            
+            
 
-			
-			/*$("#addimage").on("submit",function(event){
-				console.log("submit");
-
-				
-			});*/
-			
-			$(document).on("change","#inputimages",function(event){
-				
-				//$("#addimage").submit();
-				
-				//var postData = $("#addimage").serializeArray();
-				//var formURL = "<?php echo base_url('admin/uploadimages'); ?>"
-				
-				/*$.ajax({
-			        url : formURL,
-			        type: "POST",
-			        data : postData,
-			        success:function(data, textStatus, jqXHR) 
-			        {
-			            console.log(data);
-			            console.log(textStatus);
-			        },
-			        error: function(jqXHR, textStatus, errorThrown) 
-			        {
-			            //if fails    
-			            console.log(jqXHR);
-			            console.log(textStatus);  
-			        }
-    			});	*/
-    			
-    			
-    			
-    			
-
-				
-				
-			});
-			
-			$('#inputimages').submit(function(e) {
-				e.preventDefault();
-				$.ajaxFileUpload({
-					url 			:'<?php echo base_url('admin/uploadimages'); ?>', 
-					secureuri		:false,
-					fileElementId	:'userfile',
-					dataType		: 'json',
-					data			: {
-						'title'				: $('#title').val()
-					},
-					success	: function (data, status)
-					{
-						if(data.status != 'error')
-						{
-							$('#images_conrainer').html('<p>Reloading files...</p>');
-							refresh_files();
-							$('#images_conrainer').val('');
-						}
-						console.log(data.msg);
-					}
-				});
-				return false;
-			});
-			
-			
-			function uoploadfile(target){
-				
-			}
+            
+        });
 		</script>
+		
+		
 	</body>
 </html>
