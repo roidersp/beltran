@@ -9,9 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href='http://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Hind:400,600,700,500,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/beltran/css/normalize.css"/>
 		<link rel="stylesheet" href="/beltran/css/estilos.css" />
 		<link rel="stylesheet" href="/beltran/css/admin.css" />
-		<link rel="stylesheet" href="/beltran/css/normalize.css"/>
 		<script type="text/javascript" src="/beltran/js/jquery.min.js"></script>
 		<script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
 
@@ -33,38 +33,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="tabla_cont">
 						<div class="tabla_titulo">Expediente</div>
 						<div class="tabla_cont">
-							<div class="form_cont">
-								<form action="addacuerdo" id="acuerdoajax" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
-									<div class="form_text">Fecha de Auto</div>
-									<input type="date" name="fecha_auto" />
-									<div class="form_text">Fecha de publicación</div>
-									<input type="date" name="fecha_publicacion" />
-									<div class="form_text">Resumen</div>
-									<textarea name="resumen" rows="4" cols="20"></textarea>
-									<div class="form_text">Tipo</div>
-									<input type="text" name="tipo" />
-									
-									
-									<input type="submit" value="Guardar"/>
-								</form>
-								
-								<?php echo form_open_multipart('admin/uploadimages', array('id' => 'addimage'));?>									
-									<input type="file" multiple = "multiple" accept = "image/*" class = "form-control" name="uploadfile[]" size="20" id="nl" /><br />
-									<input type="hidden" name="id" value="<?php echo($id); ?>" />
-									
-						            <input type="submit" class = "btn btn-primary" />
-						        </form>
-
-								</form>	
-								
-								
-								<div id="images_conrainer">
-									
+							<div class="form_cont k">
+								<div class="form_side izqu">
+									<form action="addacuerdo" id="acuerdoajax" method="post" enctype="multipart/form-data">
+										<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
+										<div class="form_text">Fecha de Auto</div>
+										<input type="date" name="fecha_auto" />
+										<div class="form_text">Fecha de publicación</div>
+										<input type="date" name="fecha_publicacion" />
+										<div class="form_text">Resumen</div>
+										<textarea name="resumen" rows="4" cols="20"></textarea>
+										<div class="form_text">Tipo</div>
+										<input type="text" name="tipo" />
+										
+										
+										
+									</form>
 								</div>
-																		
+								<div class="form_side dere">
+									<?php echo form_open_multipart('admin/uploadimages', array('id' => 'addimage'));?>															
+										<div class="selectfile">
+											<div class="textselect">Agregar imágenes</div>
+											<input type="file" multiple = "multiple" accept = "image/*" class = "form-control" name="uploadfile[]" size="20" id="inputimages" />
+										</div>
+										<input type="hidden" name="id" value="<?php echo($id); ?>" />
+									</form>	
 								
-													
+								
+									<div id="images_container">
+										
+									</div>
+																		
+								</div>
+									<input type="submit" value="Guardar"/>				
 							</div>
 						</div>
 					</div>			
@@ -84,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             var options = {
                 beforeSend: function(){
                     // Replace this with your loading gif image
-                    $("#images_conrainer").html('subiendo');
+                   // $("#images_container").html('subiendo');
                 },
                 complete: function(response){
                     // Output AJAX response to the div container
@@ -94,9 +95,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    $.each(list, function(index, item){
 	                   console.log(item);
 	                   var input = '<input id="imagen_'+index+'" type="hidden" name="urls[]" value="'+item+'" />';
+	                   var image = '<div class="image_item" id="image_item_'+index+'" num="'+index+'" style="background-image: url(../'+item+');"  ><div class="image_remove">X</div></div>' ;
 	                   $("#acuerdoajax").append(input);
-	                   
-	                   $()
+	                   $("#images_container").append(image);
                    })
                     
                 }
@@ -104,6 +105,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
             // Submit the form
             $("#addimage").ajaxForm(options);  
+            
+            $("#inputimages").on("change",function(){
+	            $("#addimage").submit();
+            });
             
             
 
