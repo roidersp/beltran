@@ -25,6 +25,7 @@ class Admin extends CI_Controller {
         $this->load->model(array('usuarios_model'));
 		$this->load->model(array('expedientes_model'));
 		$this->load->model(array('acuerdo_model'));
+		$this->load->model(array('archivos_model'));
     }
 	 
 	public function index()
@@ -61,9 +62,14 @@ class Admin extends CI_Controller {
 	public function cliente($id)
 	{	
 		$users  = $this->usuarios_model->get_usuario($id);
+		if(!$users){
+			redirect("admin", 'location');
+		}
+		
 		$data['cliente']=($users);
 		$data['tabla']=$this->expedientes_model->getexpedientes_bycliente($id);
 		$this->load->view('admin/cliente',$data);
+		
 	}
 	
 	public function expediente($id)
@@ -71,6 +77,7 @@ class Admin extends CI_Controller {
 		$users  = $this->expedientes_model->get_expediente($id);
 		$data['expediente']=($users);
 		$data["id"]=$id;
+		$data['tabla']=$this->acuerdo_model->getacuerdos_byexpedientes($id);
 		$this->load->view('admin/expediente',$data);
 	}
 	
@@ -106,13 +113,29 @@ class Admin extends CI_Controller {
 	public function addacuerdo()
 	{	
 		$data = $this->input->post(NULL, TRUE);
-
 		
-		var_dump( $_POST);
+		
+
+		$urls=$data['urls'];
+		unset($data['urls']);
+		
+		$acuerdo_id  = $this->acuerdo_model->create($data);
+		
+		echo $acuerdo_id;
 		echo "<br>";
-		var_dump( $_FILES);
+		
+		$archivos  = $this->archivos_model->create($urls,$acuerdo_id);
+		
 		echo "<br>";
+		
 		var_dump($data);
+		echo "<br>";
+		var_dump($urls);
+		echo "<br>";
+		var_dump($archivos);
+		
+		
+		
 	}
 	
 	public function uploadimages()

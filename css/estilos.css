@@ -92,6 +92,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 }
 
 .form_cont{
-	width: 450px;
-	
+	width: 200px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
 }

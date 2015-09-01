@@ -36,20 +36,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="form_cont">
 								<form action="<?php echo base_url('admin/updateusuario'); ?>" method="post">
 									<input type="hidden" name="id" value="<?php echo $expediente["idExpediente"]; ?>"/>
-									<div class="form_text">No. Expediente</div>
+									<div class="form_text">Fecha Auto</div>
 									<input type="text" name="no_expedientes" value="<?php echo $expediente['no_expediente']; ?>" />
-									<div class="form_text">Fecha de presentación</div>
+									<div class="form_text">Fecha de publicación</div>
 									<input type="date" name="fecha_presentacion" value="<?php echo $expediente['fecha_presentacion']; ?>" />
-									<div class="form_text">Fecha de ingreso</div>
+									<div class="form_text">Resumen</div>
 									<input type="date" name="fecha_ingreso" value="<?php echo $expediente['fecha_ingreso']; ?>"/>
-									<div class="form_text">Secretaria</div>
+									<div class="form_text">Tipo</div>
 									<input type="text" name="secretaria" value="<?php echo $expediente['secretaria']; ?>"/>
-									<div class="form_text">Actor</div>
+									<div class="form_text">Archivos</div>
 									<input type="text" name="actor" value="<?php echo $expediente['actor']; ?>"/>
-									<div class="form_text">Demandado</div>
-									<input type="text" name="demandado" value="<?php echo $expediente['demandado']; ?>"/>
-									<div class="form_text">Juicio</div>
-									<input type="text" name="juicio" value="<?php echo $expediente['juicio']; ?>"/>
+									
 									<input type="submit" value="Guardar"/>
 								</form>						
 							</div>

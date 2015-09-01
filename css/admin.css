@@ -7,6 +7,7 @@
 
 .body_container{
 	width: 90%;
+	max-width: 1000px;
 	margin: 80px auto;
 }
 
@@ -18,6 +19,7 @@
 	height: 600px;
 	margin-top: 30px;
 	background-color: white;
+	text-align: center;
 }
 
 .contain{
@@ -40,16 +42,36 @@
 	
 }
 
-tr.selected{
+.content_zona{
+	padding: 10px;
+}
+
+#table_container{
+	
+	margin:auto;
+}
+
+#table_container td{
+	padding: 5px 0px;
+	text-align: center;
+}
+
+#table_container tr.selected{
 	cursor: pointer;
 }
 
 .tabla_cont{
-	padding: 10px 15px;
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 220px);
 }
 
 .header_zona_titulo{
 	float: left;
+}
+
+#table_container tr.selected{
+	background-color: #ababab; 
 }
 
 .header_zona_btnCliente{
@@ -74,6 +96,7 @@ tr.selected{
 	display: table;
 	width: 600px;
 	margin: auto;
+	text-align: left;
 }
 
 .izqu{

@@ -67,10 +67,15 @@ class Usuarios_model extends CI_Model
             
             $query_users_array = $query_result->result_array();
             
+            if($query_users_array!= "undefined" ){
+	            $json = ($query_users_array[0]);
+	            return $json;
+            }else{
+	            return false;
+            }
             
-            $json = ($query_users_array[0]);
             
-            return $json;
+            
             
     }
 

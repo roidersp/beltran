@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="form_cont k">
 								<div class="form_side izqu">
 									<form action="addacuerdo" id="acuerdoajax" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="Usuarios_idUsuarios" value="<?php echo($id); ?>"/>
+										<input type="hidden" name="Expediente_idExpediente" value="<?php echo($id); ?>"/>
 										<div class="form_text">Fecha de Auto</div>
 										<input type="date" name="fecha_auto" />
 										<div class="form_text">Fecha de publicación</div>
@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 																		
 								</div>
-									<input type="submit" value="Guardar"/>				
+									<input id="enviar_form" type="submit" value="Guardar"/>				
 							</div>
 						</div>
 					</div>			
@@ -109,6 +109,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $("#inputimages").on("change",function(){
 	            $("#addimage").submit();
             });
+            
+            $("#enviar_form").on("click",function(){
+	            $("#acuerdoajax").submit();
+            })
             
             
 

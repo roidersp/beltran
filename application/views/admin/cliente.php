@@ -84,7 +84,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 					<div class="content_zona">
 						
-						<div class="tabla_cont">
 							<div class="form_cont">
 								<form action="<?php echo base_url('admin/updateusuario'); ?>" method="post">
 									<input type="hidden" name="id" value="<?php echo $cliente["idUsuarios"]; ?>"/>
@@ -107,9 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 							<div class="tabla_cont">
 								<div class="tabla_titulo">Usuarios</div>
-								<div class="tabla_cont">
-									<div class="form_t"></div>
-									<div  id="table_container" style="max-width:800px;width=100%;margin:auto;">
+									<div  id="table_container" >
 										<table cellpadding="0" cellspacing="0" border="0" class="display" id="table" width="100%">
 											<thead>
 									            <tr>
@@ -124,11 +121,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									            </tr>
 									        </thead>
 										</table>
-									</div>
 								</div>
 							</div>
 							
-						</div>						
 					</div>
 					
 				</div>

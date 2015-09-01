@@ -9,23 +9,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href='http://fonts.googleapis.com/css?family=Muli:400,300italic,300,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Hind:400,600,700,500,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
 		<link rel="stylesheet" href="<?php echo base_url('css/normalize.css'); ?>"/>
 		<link rel="stylesheet" href="<?php echo base_url('css/admin.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('css/estilos.css'); ?>" />
 		<script type="text/javascript" src="<?php echo base_url('js/jquery.min.js'); ?>"></script>
-		<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>DataTables/datatables.min.css"/>
+		<script type="text/javascript" src="<?php echo base_url() ?>DataTables/datatables.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			/* Data set - can contain whatever information you want */
 
-			var json=<?php //echo(json_encode( $tabla));?>;
-			var aDataSet = json;
+			var json=<?php echo(json_encode( $tabla));?>;
+			var	aDataSet= new Array();		
+			$.each(json, function(index, value) {
+				    var boton='<div class="ver_imagen" uuid="'+value["Expediente_idExpediente"]+'">Ver imágenes</div>';
+				    value["archivos"]=boton;
+				    
+				    aDataSet.push(value);
+				    
+			}); 
 			console.log(aDataSet);
 			
 			$(document).ready(function() {
 			
 				
-				/*var table = $('#table').dataTable( {
+				var table = $('#table').dataTable( {
 					aaData: aDataSet,
 					iDisplayLength: 50,
 					bScrollInfinite: true,
@@ -34,19 +41,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			        rowId: 'staffId',
 			        responsive: true,
 			        columns: [
-				        { data: 'idExpediente' },
-				        { data: 'no_expediente' },
-				        { data: 'fecha_presentacion' },
-				        { data: 'fecha_ingreso' },
-				        { data: 'secretaria' },
-				        { data: 'actor' },
-				        { data: 'demandado' },
-				        { data: 'juicio' }
+				        { data: 'idAcuerdos' },
+				        { data: 'fecha_auto' },
+				        { data: 'fecha_publicacion' },
+				        { data: 'resumen' },
+				        { data: 'tipo' },
+				        { data: 'archivos' }
 				    ]
 					
 				} );
-				*/	
+				
 			} );
+			
+			
 			
 			$(document).on({
 			    mouseenter: function () {
@@ -56,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			    mouseleave: function () {
 			        $(this).removeClass('selected');
 			    }
-			}, "#table tr");
+			}, "#table tbody tr");
 			
 			$(document).on("click","tbody tr", function(){
 				var id = $(this).find(".sorting_1").text();
@@ -83,10 +90,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</form>
 					</div>
 					
+					
+					
 					<div class="content_zona">
 						
-									
-						<div class="tabla_cont">
 							<div class="form_cont">
 								<form action="<?php echo base_url('admin/updateusuario'); ?>" method="post">
 									<input type="hidden" name="id" value="<?php echo $expediente["idExpediente"]; ?>"/>
@@ -109,9 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 							<div class="tabla_cont">
 								<div class="tabla_titulo">Usuarios</div>
-								<div class="tabla_cont">
-									<div class="form_t"></div>
-									<div  id="table_container" style="max-width:800px;width=100%;margin:auto;">
+									<div  id="table_container" >
 										<table cellpadding="0" cellspacing="0" border="0" class="display" id="table" width="100%">
 											<thead>
 									            <tr>
@@ -124,9 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									            </tr>
 									        </thead>
 										</table>
-									</div>
 								</div>
-							</div>
 							
 						</div>						
 					</div>
