@@ -113,8 +113,6 @@ class Admin extends CI_Controller {
 	public function addacuerdo()
 	{	
 		$data = $this->input->post(NULL, TRUE);
-		
-		
 
 		$urls=$data['urls'];
 		unset($data['urls']);

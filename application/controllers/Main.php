@@ -22,13 +22,12 @@ class Main extends CI_Controller {
 	  public function __construct() {
         parent::__construct();
         $this->load->helper(array('url'));
-        $this->load->library(array('session','form_validation'));
     }
 
 	 
 	public function index()
 	{
-		switch ($this->session->userdata('perfil')) {
+		/*switch ($this->session->userdata('perfil')) {
 			case '':
 				//$data['token'] = $this->token();
 				//$data['titulo'] = 'Login con roles de usuario en codeigniter';
@@ -45,9 +44,12 @@ class Main extends CI_Controller {
 				break;
 			default:		
 				//$data['titulo'] = 'Login con roles de usuario en codeigniter';
-				$this->load->view('main');				
+								
 			break;		
 		}
+		*/
+		
+		$this->load->view('main');
 		
 		
 		
