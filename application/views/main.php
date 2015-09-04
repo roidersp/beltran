@@ -24,12 +24,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							Acceso a clientes 
 						</div>
 						<div class="login_formulario">
-							<div class="formulario_text">Usuario:</div>
+							<form action="login">
+							<div class="formulario_text">Correo:</div>
 							<input type="text" name="usuario" />
 							<div class="formulario_text">Contraseña:</div>
-							<input type="password" name="usuario" />
+							<input type="password" name="password" />
+							<?=form_hidden('token',$token)?>
 							<br>
 							<input type="submit" id="btn_accesar" value="Accesar">
+							</form>
 						</div>
 					</div>
 				</div>

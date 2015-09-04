@@ -55,6 +55,9 @@ class Admin extends CI_Controller {
 	public function add()
 	{
 		$data = $this->input->post(NULL, TRUE);
+		
+		$pass = $this->encrypt->encode("pass"); 
+		
 		$user_id = $this->usuarios_model->create($data);
 		redirect("admin", 'location');
 	}

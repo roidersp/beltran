@@ -21,17 +21,18 @@ class Main extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-        $this->load->helper(array('url'));
+        $this->load->helper(array('url','form'));
+        $this->load->library('session');
     }
 
 	 
 	public function index()
 	{
-		/*switch ($this->session->userdata('perfil')) {
+		switch ($this->session->userdata('perfil')) {
 			case '':
-				//$data['token'] = $this->token();
+				$data['token'] = $this->token();
 				//$data['titulo'] = 'Login con roles de usuario en codeigniter';
-				$this->load->view('main');
+				$this->load->view('main',$data);
 				break;
 			case 'administrador':
 				redirect(base_url().'admin');
@@ -47,9 +48,9 @@ class Main extends CI_Controller {
 								
 			break;		
 		}
-		*/
+	
 		
-		$this->load->view('main');
+		//$this->load->view('main');
 		
 		
 		
@@ -57,6 +58,13 @@ class Main extends CI_Controller {
 	
 	public function login(){
 		
+	}
+	
+		public function token()
+	{
+		$token = md5(uniqid(rand(),true));
+		$this->session->set_userdata('token',$token);
+		return $token;
 	}
 	
 }
