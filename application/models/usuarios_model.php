@@ -24,7 +24,6 @@ class Usuarios_model extends CI_Model
     public function update($id,$data){
 	    $this->db->where($this->id, $id);
 		$this->db->update($this->table_name, $data);
-		
     }
     
     public function get_all() {

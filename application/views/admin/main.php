@@ -86,10 +86,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="tabla_cont">
 						<div class="tabla_titulo">Usuarios</div>
-							<div  id="table_container" >
+						<div class="tabla_cont">
+							<div class="form_t"></div>
+							<div  id="table_container" style="max-width:1200px;width=100%;margin:auto;">
 								<table cellpadding="0" cellspacing="0" border="0" class="display" id="table" width="100%">
 								</table>
 							</div>
+						</div>
 					</div>			
 				</div>
 			</div>

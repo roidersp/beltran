@@ -20,7 +20,6 @@ class Acuerdo_model extends CI_Model
         $this->db->insert($this->table_name, $param);
         $id = $this->db->insert_id();
         
-        
         return $id;
     	          
     }
