@@ -26,6 +26,12 @@ class Admin extends CI_Controller {
 		$this->load->model(array('expedientes_model'));
 		$this->load->model(array('acuerdo_model'));
 		$this->load->model(array('archivos_model'));
+		if($this->session->userdata('perfil') == 'admin')
+		{
+			
+		}else{
+			redirect(base_url().'login');
+		}
     }
 	 
 	public function index()

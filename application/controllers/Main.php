@@ -28,7 +28,7 @@ class Main extends CI_Controller {
 	 
 	public function index()
 	{
-		switch ($this->session->userdata('perfil')) {
+		/*switch ($this->session->userdata('perfil')) {
 			case '':
 				$data['token'] = $this->token();
 				//$data['titulo'] = 'Login con roles de usuario en codeigniter';
@@ -52,15 +52,49 @@ class Main extends CI_Controller {
 		
 		//$this->load->view('main');
 		
+		*/
+		
+		redirect(base_url().'login');
+		
 		
 		
 	}
 	
 	public function login(){
-		
+		echo("dsfsdf");
+		/*if($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token'))
+		{
+    
+            //lanzamos mensajes de error si es que los hay
+			
+				$username = $this->input->post('usuario');
+				$password = ($this->input->post('password'));
+				$check_user = $this->login_model->login_user($username,$password);
+				if($check_user == TRUE)
+				{
+					$data = array(
+	                'is_logued_in' 	=> 		TRUE,
+	                'id_usuario' 	=> 		$check_user->id,
+	                'perfil'		=>		$check_user->perfil,
+	                'username' 		=> 		$check_user->username
+            		);		
+					$this->session->set_userdata($data);
+					
+				}else
+				{
+					echo("test");
+				}
+			
+		}
+			//redirect(base_url());
+		*/
 	}
 	
-		public function token()
+	public function logout(){
+		echo "ftugyh";
+	}
+	
+	public function token()
 	{
 		$token = md5(uniqid(rand(),true));
 		$this->session->set_userdata('token',$token);

@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							Acceso a clientes 
 						</div>
 						<div class="login_formulario">
-							<form action="login">
+							<form action="<?php echo base_url('login/ingresar'); ?>" method="post">
 							<div class="formulario_text">Correo:</div>
 							<input type="text" name="usuario" />
 							<div class="formulario_text">Contraseña:</div>
