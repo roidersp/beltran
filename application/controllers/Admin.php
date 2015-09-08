@@ -74,7 +74,7 @@ class Admin extends CI_Controller {
 			redirect("admin", 'location');
 	    }else{
 		    $this->session->set_flashdata('error','Error al crear nuevo usuario, intente de nuevo por favor');
-		    redirect("admin", 'location');
+		    redirect("admin/nuevo", 'refresh');
 	    }
 		
 	}
