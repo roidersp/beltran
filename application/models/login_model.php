@@ -19,7 +19,8 @@ class Login_model extends CI_Model {
 			return $query->row();
 		}else{
 			$this->session->set_flashdata('usuario_incorrecto','Los datos introducidos son incorrectos');
-			redirect(base_url(),'refresh');
+			return "usuario_incorrecto";
+			//redirect(base_url(),'refresh');
 		}
 	}
 }

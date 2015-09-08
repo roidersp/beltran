@@ -26,6 +26,7 @@ class Admin extends CI_Controller {
 		$this->load->model(array('expedientes_model'));
 		$this->load->model(array('acuerdo_model'));
 		$this->load->model(array('archivos_model'));
+		
 		if($this->session->userdata('perfil') == 'admin')
 		{
 			
@@ -64,8 +65,18 @@ class Admin extends CI_Controller {
 		
 		$pass = $this->encrypt->encode("pass"); 
 		
-		$user_id = $this->usuarios_model->create($data);
-		redirect("admin", 'location');
+		$hash = $this->bcrypt->hash_password($pass);
+		if ($this->bcrypt->check_password($pass, $hash))
+        {
+	        $data['password']=$pass;
+		
+			$user_id = $this->usuarios_model->create($data);
+			redirect("admin", 'location');
+	    }else{
+		    $this->session->set_flashdata('error','Error al crear nuevo usuario, intente de nuevo por favor');
+		    redirect("admin", 'location');
+	    }
+		
 	}
 
 	public function cliente($id)

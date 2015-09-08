@@ -22,7 +22,7 @@ class Login extends CI_Controller {
 	  public function __construct() {
         parent::__construct();
         $this->load->helper(array('url','form'));
-        
+        $this->load->library('bcrypt');
         $this->load->model(array('login_model'));
     }
 
@@ -58,13 +58,17 @@ class Login extends CI_Controller {
 	}
 	
 	public function ingresar(){
+		
+		echo $this->input->post('token');
+		echo "<br>";
+		
 		if($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token'))
 		{
     
             //lanzamos mensajes de error si es que los hay
 			
 				$username = $this->input->post('usuario');
-				$password = ($this->input->post('password'));
+				$password = $this->encrypt->encode($this->input->post('password'));
 				$check_user = $this->login_model->login_user($username,$password);
 				
 				var_dump($check_user);
@@ -87,7 +91,14 @@ class Login extends CI_Controller {
 				}
 			
 		}else{
-			redirect(base_url());
+			
+			$username = $this->input->post('usuario');
+				$password = $this->encrypt->encode($this->input->post('password'));
+				
+				echo $password;
+				echo "<br>";
+			echo "false";
+			//redirect(base_url());
 		}
 			
 	
