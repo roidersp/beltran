@@ -179,7 +179,6 @@ class Admin extends CI_Controller {
 		            $temp = explode(".", $_FILES["uploadfile"]["name"][$i]);
 		            $extension = end($temp);
 		            
-		            
 		            move_uploaded_file($_FILES["uploadfile"]["tmp_name"][$i], $upload_dir . $_FILES["uploadfile"]["name"][$i]);
 		            $test[]=  $upload_dir . $_FILES["uploadfile"]["name"][$i];        
 		        }
@@ -189,6 +188,12 @@ class Admin extends CI_Controller {
 		
 		echo(json_encode($test));  
 	        
+	}
+	
+	public function deleteimages(){
+		$data = $this->input->post(NULL, TRUE);
+		
+		var_dump($data);
 	}
 	
 	

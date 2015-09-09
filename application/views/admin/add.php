@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="form_text">tipo</div>
 									<select name="tipo">
 										<option selected="selected" value="cliente" >Cliente</option>
-										<option value="administrador">Administrador</option>
+										<option value="admin">Administrador</option>
 										<option value="colaborador">Colaborador</option>
 									</select><br>	
 									<input type="submit" value="Guardar"/>

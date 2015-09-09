@@ -75,50 +75,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		</div>
 		
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-			
-			var fileInput = document.getElementById('nl');
-			var fd = new FormData(this);
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+	
+		var fileInput = document.getElementById('nl');
+		var fd = new FormData(this);
+	
 		
-			
-            var options = {
-                beforeSend: function(){
-                    // Replace this with your loading gif image
-                   // $("#images_container").html('subiendo');
-                },
-                complete: function(response){
-                    // Output AJAX response to the div container
-                   // $("#images_conrainer").html(response.responseText);
-                   var list=$.parseJSON(response.responseText)
-                   
-                   $.each(list, function(index, item){
-	                   console.log(item);
-	                   var input = '<input id="imagen_'+index+'" type="hidden" name="urls[]" value="'+item+'" />';
-	                   var image = '<div class="image_item" id="image_item_'+index+'" num="'+index+'" style="background-image: url(../'+item+');"  ><div class="image_remove">X</div></div>' ;
-	                   $("#acuerdoajax").append(input);
-	                   $("#images_container").append(image);
-                   })
-                    
-                }
-            };  
- 
-            // Submit the form
-            $("#addimage").ajaxForm(options);  
-            
-            $("#inputimages").on("change",function(){
-	            $("#addimage").submit();
-            });
-            
-            $("#enviar_form").on("click",function(){
-	            $("#acuerdoajax").submit();
-            })
-            
-            
-
-            
-        });
-		</script>
+	    var options = {
+	        beforeSend: function(){
+	            // Replace this with your loading gif image
+	           // $("#images_container").html('subiendo');
+	        },
+	        complete: function(response){
+	            // Output AJAX response to the div container
+	           // $("#images_conrainer").html(response.responseText);
+	           var list=$.parseJSON(response.responseText)
+	           
+	           $.each(list, function(index, item){
+	               console.log(item);
+	               var input = '<input id="imagen_'+index+'" type="hidden" name="urls[]" value="'+item+'" />';
+	               var image = '<div class="image_item" id="image_item_'+index+'" num="'+index+'" url="'+item+'" style="background-image: url(../'+item+');"  ><div class="image_remove">X</div></div>' ;
+	               $("#acuerdoajax").append(input);
+	               $("#images_container").append(image);
+	           });
+	            
+	        }
+	    };  
+	
+	    // Submit the form
+	    $("#addimage").ajaxForm(options);  
+	    
+	    $("#inputimages").on("change",function(){
+	        $("#addimage").submit();
+	    });
+	    
+	    $("#enviar_form").on("click",function(){
+	        $("#acuerdoajax").submit();
+	    });
+	    
+	    $(document).on("click",".image_remove",function(){
+		   var url_image = $(this).parent().attr("url");
+		   $.post( "admin/deleteimage", { url: url_image })
+			  .done(function( data ) {
+			    alert( "Data Loaded: " + data );
+			});
+		   
+		   
+	    });
+	});
+</script>
 		
 		
 	</body>

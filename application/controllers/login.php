@@ -19,7 +19,7 @@ class Login extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	 
-	  public function __construct() {
+	public function __construct() {
         parent::__construct();
         $this->load->helper(array('url','form'));
         $this->load->library('bcrypt');
@@ -27,7 +27,7 @@ class Login extends CI_Controller {
     }
 
 	 
-	public function index()
+	public function index($msj=null)
 	{
 		switch ($this->session->userdata('perfil')) {
 			case '':
@@ -41,7 +41,7 @@ class Login extends CI_Controller {
 			case 'editor':
 				redirect(base_url().'editor');
 				break;	
-			case 'suscriptor':
+			case 'cliente':
 				redirect(base_url().'expedientes');
 				break;
 			default:		
@@ -53,8 +53,6 @@ class Login extends CI_Controller {
 		
 		//$this->load->view('main');
 		
-		
-		
 	}
 	
 	public function ingresar(){
@@ -64,14 +62,10 @@ class Login extends CI_Controller {
 		
 		if($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token'))
 		{
-    
             //lanzamos mensajes de error si es que los hay
-			
 				$username = $this->input->post('usuario');
 				$password = $this->encrypt->encode($this->input->post('password'));
 				$check_user = $this->login_model->login_user($username,$password);
-				
-				var_dump($check_user);
 				
 				if($check_user == TRUE)
 				{
@@ -89,7 +83,7 @@ class Login extends CI_Controller {
 				{
 					echo("test");
 				}
-			
+			$this->index("mensaje");
 		}else{
 			
 			$username = $this->input->post('usuario');
@@ -100,7 +94,6 @@ class Login extends CI_Controller {
 			echo "false";
 			//redirect(base_url());
 		}
-			
 	
 	}
 	
